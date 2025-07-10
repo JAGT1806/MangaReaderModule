@@ -1,4 +1,4 @@
-package com.jagt.reader.mangareadermodule;
+package com.jagt.reader.bootstrap;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -12,6 +12,7 @@
 	<groupId>com.jagt.reader</groupId>
 	<artifactId>MangaReaderModule</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
 	<name>MangaReaderModule</name>
 	<description>MangaReaderModule</description>
@@ -25,6 +26,9 @@
 	<developers>
 		<developer/>
 	</developers>
+	<modules>
+		<module>bootstrap</module>
+	</modules>
 
 	<scm>
 		<connection/>
