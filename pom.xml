@@ -28,6 +28,12 @@
 	</developers>
 	<modules>
 		<module>bootstrap</module>
+		<module>shared/i18n/domain</module>
+		<module>shared/i18n/application</module>
+		<module>shared/i18n/infrastructure</module>
+		<module>shared/security/domain</module>
+		<module>shared/security/application</module>
+		<module>shared/security/infrastructure</module>
 	</modules>
 
 	<scm>
