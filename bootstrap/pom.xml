@@ -36,6 +36,11 @@
             <artifactId>shared.i18n.infrastructure</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.jagt.reader.shared.security.infrastructure</groupId>
+            <artifactId>shared.security.infrastructure</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
