@@ -31,7 +31,7 @@ public class GetRoleUseCaseImpl implements GetRoleUseCase {
         List<Role> roles;
         long total;
 
-        if (query.roleName().value() != null || query.roleName().value().trim().isEmpty()) {
+        if (query.roleName().value() == null || query.roleName().value().trim().isEmpty()) {
             roles = rolePersistencePort.findAll(query.pagination().offset(), query.pagination().limit());
             total = rolePersistencePort.count();
         } else {

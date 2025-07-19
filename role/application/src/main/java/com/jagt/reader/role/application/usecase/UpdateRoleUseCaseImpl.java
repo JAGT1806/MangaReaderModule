@@ -8,6 +8,7 @@ import com.jagt.reader.role.application.validation.input.Validation;
 import com.jagt.reader.role.domain.exception.RoleExistException;
 import com.jagt.reader.role.domain.model.Role;
 import com.jagt.reader.role.domain.port.output.RolePersistencePort;
+import com.jagt.reader.shared.common.domain.model.value.AuditTimestampsValue;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,14 +37,15 @@ public class UpdateRoleUseCaseImpl implements UpdateRoleUseCase {
             Role roleWithSameName = rolePersistencePort.findByName(command.roleName().value().toUpperCase())
                     .orElse(new Role());
 
-            if (!roleToUpdate.getId().equals(roleWithSameName.getId())) {
+            if (roleWithSameName.getId() != null && !roleToUpdate.getId().equals(roleWithSameName.getId())) {
                 throw new RoleExistException(command.roleName().value().toUpperCase());
             }
 
             roleToUpdate.setName(roleApplicationMapper.toValue(command.roleName().value().toUpperCase()));
         }
 
-        roleToUpdate.getAuditTimestamps().updated();
+        AuditTimestampsValue timestampsUpdate = roleToUpdate.getAuditTimestamps().updated();
+        roleToUpdate.setAuditTimestamps(timestampsUpdate);
 
         return rolePersistencePort.save(roleToUpdate);
     }
