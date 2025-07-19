@@ -34,6 +34,12 @@
 		<module>shared/security/domain</module>
 		<module>shared/security/application</module>
 		<module>shared/security/infrastructure</module>
+		<module>shared/common/domain</module>
+		<module>shared/common/application</module>
+		<module>shared/common/infrastructure</module>
+		<module>role/domain</module>
+		<module>role/application</module>
+		<module>role/infrastructure</module>
 	</modules>
 
 	<scm>

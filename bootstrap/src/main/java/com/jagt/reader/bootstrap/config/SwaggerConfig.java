@@ -38,7 +38,7 @@ public class SwaggerConfig {
 
     @Bean
     public OpenApiCustomizer languageHeaderCustomizer() {
-        return openApi -> openApi.getPaths().values().forEach(pathItem -> { pathItem
+        return openApi -> openApi.getPaths().values().forEach(pathItem -> pathItem
                 .readOperations()
                 .forEach(operation -> {
                     Parameter langHeader = new Parameter()
@@ -47,8 +47,8 @@ public class SwaggerConfig {
                             .required(false)
                             .schema(new StringSchema()._default("es"));
                     operation.addParametersItem(langHeader);
-                });
-        });
+                })
+        );
     }
 
 }
