@@ -12,7 +12,6 @@ public class MangaReaderModuleApplication {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MangaReaderModuleApplication.class);
 
 	public static void main(String[] args) {
-        SpringApplication.run(MangaReaderModuleApplication.class, args);
 
 		try {
 			Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
@@ -26,6 +25,8 @@ public class MangaReaderModuleApplication {
 		} catch (Exception e) {
 			LOGGER.error("Error loading .env file: {}", e.getMessage());
 		}
+
+		SpringApplication.run(MangaReaderModuleApplication.class, args);
 
 	}
 

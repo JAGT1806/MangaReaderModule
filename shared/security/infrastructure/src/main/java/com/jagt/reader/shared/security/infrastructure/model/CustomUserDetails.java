@@ -1,6 +1,7 @@
 package com.jagt.reader.shared.security.infrastructure.model;
 
 import com.jagt.reader.shared.security.domain.model.SecurityUser;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,6 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
+@EqualsAndHashCode(callSuper = true)
 public class CustomUserDetails extends User {
     public final Long id;
     public final Boolean enabled;

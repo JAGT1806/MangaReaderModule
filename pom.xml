@@ -37,6 +37,9 @@
 		<module>shared/common/domain</module>
 		<module>shared/common/application</module>
 		<module>shared/common/infrastructure</module>
+		<module>role/domain</module>
+		<module>role/application</module>
+		<module>role/infrastructure</module>
 	</modules>
 
 	<scm>

@@ -7,9 +7,9 @@ import lombok.Value;
 @Value
 @Builder
 public class IDValue {
-    long id;
+    Long id;
 
-    public long value() {
+    public Long value() {
         return this.id;
     }
 }
