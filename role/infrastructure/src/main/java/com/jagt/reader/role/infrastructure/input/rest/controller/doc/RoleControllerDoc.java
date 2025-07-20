@@ -1,6 +1,7 @@
 package com.jagt.reader.role.infrastructure.input.rest.controller.doc;
 
-import com.jagt.reader.role.infrastructure.input.rest.request.RoleRequest;
+import com.jagt.reader.role.infrastructure.input.rest.request.CreateRoleRequest;
+import com.jagt.reader.role.infrastructure.input.rest.request.UpdateRoleRequest;
 import com.jagt.reader.role.infrastructure.input.rest.response.RoleResponse;
 import com.jagt.reader.shared.common.domain.model.Pagination;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,18 +39,18 @@ public interface RoleControllerDoc {
     @Operation(summary = "Añadir un rol al sistema")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Rol creado exitosamente",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleRequest.class)))
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CreateRoleRequest.class)))
     })
     @PostMapping("/create")
-    ResponseEntity<RoleResponse> createRole(@RequestBody RoleRequest request);
+    ResponseEntity<RoleResponse> createRole(@RequestBody @Valid CreateRoleRequest request);
 
     @Operation(summary = "Actualizar un rol al sistema")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Rol actualizado exitosamente",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoleRequest.class)))
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = CreateRoleRequest.class)))
     })
     @PutMapping("/{role-id}/update")
-    ResponseEntity<RoleResponse> updateRole(@PathVariable("role-id") Long roleId, @RequestBody RoleRequest request);
+    ResponseEntity<RoleResponse> updateRole(@PathVariable("role-id") Long roleId, @RequestBody @Valid UpdateRoleRequest request);
 
     @Operation(summary = "Eliminar un rol del sistema")
     @ApiResponses(value = {
