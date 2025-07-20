@@ -4,7 +4,8 @@ import com.jagt.reader.role.application.command.CreateRoleCommand;
 import com.jagt.reader.role.application.command.UpdateRoleCommand;
 import com.jagt.reader.role.application.query.GetRoleFilterQuery;
 import com.jagt.reader.role.domain.model.Role;
-import com.jagt.reader.role.infrastructure.input.rest.request.RoleRequest;
+import com.jagt.reader.role.infrastructure.input.rest.request.CreateRoleRequest;
+import com.jagt.reader.role.infrastructure.input.rest.request.UpdateRoleRequest;
 import com.jagt.reader.role.infrastructure.input.rest.response.RoleResponse;
 import com.jagt.reader.shared.common.application.query.GetCommonQuery;
 import com.jagt.reader.shared.common.domain.model.Pagination;
@@ -19,11 +20,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface RoleRestMapper {
     @Mapping(target = "roleName", source = "roleName", qualifiedByName = "toNameValue")
-    CreateRoleCommand toCreateCommand(RoleRequest request);
+    CreateRoleCommand toCreateCommand(CreateRoleRequest request);
 
     @Mapping(target = "roleId", source = "id", qualifiedByName = "toIDValue")
     @Mapping(target = "roleName", source = "request.roleName", qualifiedByName = "toNameValue")
-    UpdateRoleCommand toUpdateCommand(Long id, RoleRequest request);
+    UpdateRoleCommand toUpdateCommand(Long id, UpdateRoleRequest request);
 
     @Mapping(target = "id", source = "id.id")
     @Mapping(target = "roleName", source = "name.name")

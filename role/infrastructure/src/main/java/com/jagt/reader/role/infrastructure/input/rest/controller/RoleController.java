@@ -6,7 +6,8 @@ import com.jagt.reader.role.application.port.input.GetRoleUseCase;
 import com.jagt.reader.role.application.port.input.UpdateRoleUseCase;
 import com.jagt.reader.role.infrastructure.input.rest.controller.doc.RoleControllerDoc;
 import com.jagt.reader.role.infrastructure.input.rest.mapper.RoleRestMapper;
-import com.jagt.reader.role.infrastructure.input.rest.request.RoleRequest;
+import com.jagt.reader.role.infrastructure.input.rest.request.CreateRoleRequest;
+import com.jagt.reader.role.infrastructure.input.rest.request.UpdateRoleRequest;
 import com.jagt.reader.role.infrastructure.input.rest.response.RoleResponse;
 import com.jagt.reader.shared.common.domain.model.Pagination;
 import lombok.RequiredArgsConstructor;
@@ -36,13 +37,13 @@ public class RoleController implements RoleControllerDoc {
     }
 
     @Override
-    public ResponseEntity<RoleResponse> createRole(RoleRequest request) {
+    public ResponseEntity<RoleResponse> createRole(CreateRoleRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(mapper.toResponse(createRoleUseCase.execute(mapper.toCreateCommand(request))));
     }
 
     @Override
-    public ResponseEntity<RoleResponse> updateRole(Long roleId, RoleRequest request) {
+    public ResponseEntity<RoleResponse> updateRole(Long roleId, UpdateRoleRequest request) {
         return ResponseEntity.ok(mapper.toResponse(updateRoleUseCase.execute(mapper.toUpdateCommand(roleId, request))));
     }
 
