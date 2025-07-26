@@ -11,6 +11,7 @@ import com.jagt.reader.role.application.query.GetRoleFilterQuery;
 import com.jagt.reader.role.domain.model.Role;
 import com.jagt.reader.role.infrastructure.input.rest.mapper.RoleRestMapper;
 import com.jagt.reader.role.infrastructure.input.rest.request.CreateRoleRequest;
+import com.jagt.reader.role.infrastructure.input.rest.request.UpdateRoleRequest;
 import com.jagt.reader.role.infrastructure.input.rest.response.RoleResponse;
 import com.jagt.reader.shared.common.domain.model.Pagination;
 import com.jagt.reader.shared.common.domain.model.value.AuditTimestampsValue;
@@ -140,7 +141,7 @@ class RoleControllerTest {
     @Test
     void shouldUpdateRoleSuccessfully() throws Exception {
         Long roleId = 1L;
-        CreateRoleRequest request = new CreateRoleRequest("ADMIN_UPDATED");
+        UpdateRoleRequest request = new UpdateRoleRequest("ADMIN_UPDATED");
         Role updatedRole = Role.builder()
                 .id(IDValue.builder().id(roleId).build())
                 .name(NameValue.builder().name("ADMIN_UPDATED").build())

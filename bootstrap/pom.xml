@@ -46,6 +46,11 @@
             <artifactId>role.infrastructure</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.jagt.reader.user.infrastructure</groupId>
+            <artifactId>user.infrastructure</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
