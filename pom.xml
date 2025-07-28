@@ -43,6 +43,9 @@
 		<module>user/domain</module>
 		<module>user/application</module>
 		<module>user/infrastructure</module>
+        <module>manga/domain</module>
+		<module>manga/application</module>
+		<module>manga/infrastructure</module>
 	</modules>
 
 	<scm>
