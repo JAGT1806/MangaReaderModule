@@ -1,5 +1,6 @@
 package com.jagt.reader.user.infrastructure.output.aws.adapter;
 
+import com.jagt.reader.user.domain.exception.FileStorageException;
 import com.jagt.reader.user.domain.port.output.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -45,7 +46,8 @@ public class S3FileStorageAdapter implements FileStorageService {
             LOGGER.info("Uploaded file at {}", url);
             return url.toString();
         } catch (S3Exception e) {
-            return "";
+            LOGGER.info("Error cargando archivo al S3: {}", e.getMessage());
+            throw new FileStorageException("file.storage.upload.failed", e);
         }
     }
 
@@ -58,8 +60,10 @@ public class S3FileStorageAdapter implements FileStorageService {
                     .build();
 
             s3Client.deleteObject(request);
+            LOGGER.info("Archivo eliminado {}", fileName);
         } catch (S3Exception e) {
-
+            LOGGER.info("Error eliminando archivo en el S3: {}", e.getMessage(), e);
+            throw new FileStorageException("file.storage.delete.failed", e);
         }
     }
 
@@ -77,26 +81,31 @@ public class S3FileStorageAdapter implements FileStorageService {
             if(e.statusCode() == 404) {
                 return false;
             }
-
-            return false;
+            LOGGER.info("Error verificando archivo en el S3: {}", e.getMessage(), e);
+            throw new FileStorageException("file.storage.check.failed", e);
         }
     }
 
     @Override
     public String generarePreSignedDownloadUrl(String fileName, Duration duration) {
-        GetObjectRequest objectRequest = GetObjectRequest.builder()
-                .bucket(bucketName)
-                .key(fileName)
-                .build();
+        try {
+            GetObjectRequest objectRequest = GetObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(fileName)
+                    .build();
 
-        GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
-                .signatureDuration(duration)
-                .getObjectRequest(objectRequest)
-                .build();
+            GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
+                    .signatureDuration(duration)
+                    .getObjectRequest(objectRequest)
+                    .build();
 
-        PresignedGetObjectRequest request = s3Presigner.presignGetObject(presignRequest);
-        URL url = request.url();
+            PresignedGetObjectRequest request = s3Presigner.presignGetObject(presignRequest);
+            URL url = request.url();
 
-        return url.toString();
+            return url.toString();
+        } catch (S3Exception e) {
+            LOGGER.error("Error generating presigned URL: {}", e.getMessage(), e);
+            throw new FileStorageException("file.storage.presigned.url.failed", e);
+        }
     }
 }

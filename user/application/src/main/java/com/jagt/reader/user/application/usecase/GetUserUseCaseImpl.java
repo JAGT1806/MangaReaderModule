@@ -5,6 +5,7 @@ import com.jagt.reader.user.application.mapper.UserApplicationMapper;
 import com.jagt.reader.user.application.port.input.GetUserUseCase;
 import com.jagt.reader.user.application.port.input.ProfilePictureUseCase;
 import com.jagt.reader.user.application.query.GetUserFilterQuery;
+import com.jagt.reader.user.domain.exception.UserEmailNotFoundException;
 import com.jagt.reader.user.domain.exception.UserNotFoundException;
 import com.jagt.reader.user.domain.model.User;
 import com.jagt.reader.user.domain.model.value.ProfilePicture;
@@ -46,6 +47,6 @@ public class GetUserUseCaseImpl implements GetUserUseCase {
     @Override
     public User execute(String email) {
         return port.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException(String.valueOf(email)));
+                .orElseThrow(() -> new UserEmailNotFoundException(String.valueOf(email)));
     }
 }

@@ -1,7 +1,8 @@
 package com.jagt.reader.user.application.service;
 
-import com.jagt.reader.user.application.port.input.GetUserUseCase;
 import com.jagt.reader.user.application.port.input.ProfilePictureUseCase;
+import com.jagt.reader.user.domain.exception.ProfilePictureAlreadyDefaultException;
+import com.jagt.reader.user.domain.exception.ProfilePictureNotFoundException;
 import com.jagt.reader.user.domain.exception.UserNotFoundException;
 import com.jagt.reader.user.domain.model.User;
 import com.jagt.reader.user.domain.model.value.ProfilePicture;
@@ -11,7 +12,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -42,8 +42,8 @@ public class ProfilePictureService implements ProfilePictureUseCase {
 
         String uniqueFileName = generateUniqueFileName(userId, newFileName);
         LOGGER.info("FileName: {}", uniqueFileName);
-        String imageUrl = fileStorageService.uploadFile(imageData, uniqueFileName, contentType);
 
+        String imageUrl = fileStorageService.uploadFile(imageData, uniqueFileName, contentType);
         LOGGER.info("imageUrl: {}", imageUrl);
         return ProfilePicture.customPicture(imageUrl, uniqueFileName);
     }
@@ -51,22 +51,40 @@ public class ProfilePictureService implements ProfilePictureUseCase {
     @Override
     @Transactional
     public ProfilePicture delete(Long userId) {
-        User user = getUser(userId);
+        LOGGER.info("Deleting profile picture for user: {}", userId);
 
+        User user = getUser(userId);
         ProfilePicture currentPicture = user.getProfilePicture();
 
-        if (!currentPicture.isDefault() && currentPicture.getFileName() != null) {
-            fileStorageService.deleteFile(currentPicture.getFileName());
-            return ProfilePicture.defaultPicture();
+        if (currentPicture.isDefault()) {
+            throw new ProfilePictureAlreadyDefaultException("profile.picture.already.default");
         }
 
-        throw new RuntimeException(); // Excepción personalizada
+        if (currentPicture.getFileName() == null) {
+            throw new ProfilePictureNotFoundException("profile.picture.filename.not.found");
+        }
+
+        fileStorageService.deleteFile(currentPicture.getFileName());
+        LOGGER.info("Profile picture deleted successfully for user: {}", userId);
+
+        return ProfilePicture.defaultPicture();
     }
 
     @Override
     public String get(Long userId) {
+        LOGGER.info("Getting profile picture URL for user: {}", userId);
+
         User user = getUser(userId);
-        return fileStorageService.generarePreSignedDownloadUrl(user.getProfilePicture().getFileName(), Duration.ofMinutes(30));
+        ProfilePicture profilePicture = user.getProfilePicture();
+
+        if (profilePicture.isDefault() || profilePicture.getFileName() == null) {
+            throw new ProfilePictureNotFoundException("profile.picture.not.found");
+        }
+
+        return fileStorageService.generarePreSignedDownloadUrl(
+                profilePicture.getFileName(),
+                Duration.ofMinutes(10)
+        );
     }
 
     private String generateUniqueFileName(Long userId, String originalFileName) {
