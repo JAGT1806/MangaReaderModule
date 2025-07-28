@@ -8,6 +8,7 @@ import com.jagt.reader.role.domain.model.Role;
 import com.jagt.reader.role.domain.port.output.RolePersistencePort;
 import com.jagt.reader.shared.common.domain.model.Pagination;
 import com.jagt.reader.shared.common.domain.model.value.IDValue;
+import com.jagt.reader.shared.common.domain.model.value.NameValue;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,16 @@ public class GetRoleUseCaseImpl implements GetRoleUseCase {
         finishedExecutionLogger();
         return rolePersistencePort.findById(roleId.value())
                 .orElseThrow(() -> new RoleNotFoundException(String.valueOf(roleId.value())));
+    }
+
+    @Override
+    public Role execute(NameValue roleName) {
+        executeUseCaseLogger();
+        LOGGER.info("Name: {}", roleName.value());
+
+        finishedExecutionLogger();
+        return rolePersistencePort.findByName(roleName.value())
+                .orElseThrow(() -> new RoleNotFoundException(String.valueOf(roleName.value())));
     }
 
     private void executeUseCaseLogger() {

@@ -40,6 +40,9 @@
 		<module>role/domain</module>
 		<module>role/application</module>
 		<module>role/infrastructure</module>
+		<module>user/domain</module>
+		<module>user/application</module>
+		<module>user/infrastructure</module>
 	</modules>
 
 	<scm>

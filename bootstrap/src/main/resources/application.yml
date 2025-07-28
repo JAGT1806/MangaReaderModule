@@ -1,6 +1,11 @@
 spring:
   application:
     name: manga-reader
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
+      enabled: true
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
@@ -12,3 +17,19 @@ spring:
       ddl-auto: update
   jackson:
     default-property-inclusion: non_null
+
+app:
+  profile-picture:
+    max-size: 5MB
+    allowed-types:
+      - image/jpeg
+      - image/png
+      - image/gif
+
+
+aws:
+  access-key: ${AWS_ACCESS_KEY_ID:tu-access-key}
+  secret-key: ${AWS_SECRET_KEY:tu-secret-key}
+  region: ${AWS_REGION:us-east-1}
+  s3:
+    bucket-name: ${AWS_S3_BUCKET:tu-bucket-name}
