@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface MangaClientPort {
     Manga searchMangaById(String id, List<String> languages);
-    Pagination<Manga> searchMangas(String title, int offset, int limit, List<String> languages);
-    Pagination<Feed> searchMangaFeeds(String mangaId, int offset, int limit, List<String> languages);
+    Pagination<Manga> searchMangas(String title, int offset, int limit, boolean nsfw, List<String> languages);
+    Pagination<Feed> searchMangaFeeds(String mangaId, int offset, int limit, boolean nsfw, List<String> languages);
     Chapter searchChapterById(String chapterId);
 }

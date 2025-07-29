@@ -19,5 +19,15 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.jagt.reader.manga.domain</groupId>
+            <artifactId>manga.domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jagt.reader.shared.common.application</groupId>
+            <artifactId>shared.common.application</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
