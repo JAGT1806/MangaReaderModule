@@ -45,7 +45,13 @@ public class SwaggerConfig {
                             .name("Accept-Language")
                             .description("Idioma preferido para la respuesta de la aplicación (es, en, fr)")
                             .required(false)
-                            .schema(new StringSchema()._default("es"));
+                            .in("header")
+                            .schema(new StringSchema()
+                                    ._default("es")
+                                    .addEnumItem("es")
+                                    .addEnumItem("en")
+                                    .addEnumItem("fr")
+                            );
                     operation.addParametersItem(langHeader);
                 })
         );
