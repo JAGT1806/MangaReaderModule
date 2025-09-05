@@ -14,10 +14,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Tag(name = "Manga Controller", description = "Operaciones relacionadas con la consulta de mangas a la API de MangaDex")
+@Tag(name = "Manga", description = "Operaciones relacionadas con la consulta de mangas a la API de MangaDex")
 public interface MangaControllerDoc {
 
     @Operation(summary = "Obtener mangas", description = "Obtiene la información de los mangas de la API de MangaDex")

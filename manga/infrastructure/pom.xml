@@ -45,5 +45,10 @@
             <artifactId>shared.common.infrastructure</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.jagt.reader.shared.i18n.infrastructure</groupId>
+            <artifactId>shared.i18n.infrastructure</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

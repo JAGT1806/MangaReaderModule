@@ -22,13 +22,13 @@ import java.util.Objects;
 @Mapper(componentModel = "spring")
 public interface MangaClientMapper {
     @Mapping(target = "id", source = "data.id")
-    @Mapping(target = "title", source = "data.attributes.title", qualifiedByName = "getEnglishTitle")
+    @Mapping(target = "title", source = "data.attributes.title", qualifiedByName = "getFirstTitle")
     @Mapping(target = "description", source = "data.attributes.description", qualifiedByName = "getDescription")
     @Mapping(target = "coverId", source = "data.relationships", qualifiedByName = "getCoverId")
     @Mapping(target = "fileName", source = "data.relationships", qualifiedByName = "getFileName")
     Manga toManga(MangaClientResponse response, @Context List<String> languages);
 
-    @Mapping(target = "title", source = "attributes.title", qualifiedByName = "getEnglishTitle")
+    @Mapping(target = "title", source = "attributes.title", qualifiedByName = "getFirstTitle")
     @Mapping(target = "description", source = "attributes.description", qualifiedByName = "getDescription")
     @Mapping(target = "coverId", source = "relationships", qualifiedByName = "getCoverId")
     @Mapping(target = "fileName", source = "relationships", qualifiedByName = "getFileName")
@@ -52,9 +52,9 @@ public interface MangaClientMapper {
     @Mapping(target = "dataSaver", source = "chapter.dataSaver")
     Chapter toChapter(ChapterClientResponse response);
 
-    @Named("getEnglishTitle")
-    default String getEnglishTitle(Map<String, String> title) {
-        return title != null ? title.get("en") : null;
+    @Named("getFirstTitle")
+    default String getFirstTitle(Map<String, String> title) {
+        return title != null ? title.values().iterator().next() : null;
     }
 
     @Named("getDescription")
