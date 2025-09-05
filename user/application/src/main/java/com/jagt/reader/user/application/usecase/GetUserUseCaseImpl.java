@@ -36,7 +36,11 @@ public class GetUserUseCaseImpl implements GetUserUseCase {
                 .orElseThrow(() -> new UserNotFoundException(String.valueOf(userId)));
 
         if(!user.getProfilePicture().isDefault()) {
-            user.getProfilePicture().setUrl(profilePictureUseCase.get(userId));
+            try {
+                user.getProfilePicture().setUrl(profilePictureUseCase.get(userId));
+            } catch (Exception e) {
+                user.getProfilePicture().setUrl(ProfilePicture.defaultPicture().getUrl());
+            }
         } else {
             user.getProfilePicture().setUrl(ProfilePicture.defaultPicture().getUrl());
         }

@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-@Tag(name = "User Controller", description = "Operaciones relacionadas con los usuarios")
+@Tag(name = "User", description = "Operaciones relacionadas con los usuarios")
 public interface UserControllerDoc {
     @Operation(summary = "Obtener usuario por ID", description = "Recupera la información de un usuario específico mediante su identificador único"
     )

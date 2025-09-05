@@ -14,7 +14,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Role Controller", description = "Operaciones relacionadas con los roles")
+@Tag(name = "Role", description = "Operaciones relacionadas con los roles")
 public interface RoleControllerDoc {
     @Operation(summary = "Obtener los roles paginados")
     @ApiResponses(value = {

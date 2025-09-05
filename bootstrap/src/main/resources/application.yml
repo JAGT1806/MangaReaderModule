@@ -17,6 +17,13 @@ spring:
       ddl-auto: update
   jackson:
     default-property-inclusion: non_null
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            logger-level: FULL
+
 
 app:
   profile-picture:
