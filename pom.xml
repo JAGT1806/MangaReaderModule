@@ -46,6 +46,9 @@
         <module>manga/domain</module>
 		<module>manga/application</module>
 		<module>manga/infrastructure</module>
+		<module>favorite/domain</module>
+		<module>favorite/application</module>
+		<module>favorite/infrastructure</module>
 	</modules>
 
 	<scm>
