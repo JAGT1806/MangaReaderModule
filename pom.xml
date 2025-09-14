@@ -49,6 +49,9 @@
 		<module>favorite/domain</module>
 		<module>favorite/application</module>
 		<module>favorite/infrastructure</module>
+		<module>auth/domain</module>
+		<module>auth/application</module>
+		<module>auth/infrastructure</module>
 	</modules>
 
 	<scm>
@@ -64,6 +67,7 @@
 		<lombok.version>1.18.36</lombok.version>
 		<mapstruct.version>1.6.2</mapstruct.version>
 		<lombok.mapstruct.version>0.2.0</lombok.mapstruct.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<sonar.language>java</sonar.language>
 		<sonar.java.binaries>${project.build.directory}/classes</sonar.java.binaries>
