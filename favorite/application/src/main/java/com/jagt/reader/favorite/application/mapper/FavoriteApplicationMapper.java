@@ -13,6 +13,13 @@ import java.util.List;
 public interface FavoriteApplicationMapper {
     @Mapping(target = "user.id.id", source = "userId.id")
     @Mapping(target = "manga.mangaID", source = "mangaId")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "user.userValue", ignore = true)
+    @Mapping(target = "user.auditTimestamps", ignore = true)
+    @Mapping(target = "user.profilePicture", ignore = true)
+    @Mapping(target = "user.roles", ignore = true)
+    @Mapping(target = "user.enabled", ignore = true)
     Favorite toModel(AddFavoriteCommand command);
 
     @Mapping(target = "data", source = "models")

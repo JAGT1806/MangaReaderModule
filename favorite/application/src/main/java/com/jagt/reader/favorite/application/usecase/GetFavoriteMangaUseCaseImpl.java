@@ -1,7 +1,7 @@
 package com.jagt.reader.favorite.application.usecase;
 
 import com.jagt.reader.favorite.application.mapper.FavoriteApplicationMapper;
-import com.jagt.reader.favorite.application.port.input.GetFavoriteManga;
+import com.jagt.reader.favorite.application.port.input.GetFavoriteMangaUseCase;
 import com.jagt.reader.favorite.application.query.GetFavoriteByUserIdQuery;
 import com.jagt.reader.favorite.domain.model.Favorite;
 import com.jagt.reader.favorite.domain.port.output.FavoritePersistencePort;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class GetFavoriteMangaImpl implements GetFavoriteManga {
+public class GetFavoriteMangaUseCaseImpl implements GetFavoriteMangaUseCase {
     private final FavoritePersistencePort persistencePort;
     private final FavoriteApplicationMapper mapper;
 

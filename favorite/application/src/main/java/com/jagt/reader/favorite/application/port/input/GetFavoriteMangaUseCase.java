@@ -5,7 +5,7 @@ import com.jagt.reader.favorite.domain.model.Favorite;
 import com.jagt.reader.shared.common.application.query.GetCommonQuery;
 import com.jagt.reader.shared.common.domain.model.Pagination;
 
-public interface GetFavoriteManga {
+public interface GetFavoriteMangaUseCase {
     Pagination<Favorite> execute(GetCommonQuery query);
     Pagination<Favorite> execute(GetFavoriteByUserIdQuery query);
 }

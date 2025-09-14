@@ -15,7 +15,7 @@ import java.util.List;
 public interface MangaDexClient {
     @GetMapping("/manga")
     MangaListClientResponse getSearchManga(
-            @RequestParam(required = false) String title,
+            @RequestParam(required = false, defaultValue = "") String title,
             @RequestParam("includes[]") String includes,
             @RequestParam(value = "offset", defaultValue = "0") int offset,
             @RequestParam(value = "limit", defaultValue = "12") int limit,

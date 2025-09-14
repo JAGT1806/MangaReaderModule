@@ -79,7 +79,7 @@ public class UserExceptionHandler {
         return build(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 messageProvider.getMessage("profile.picture.error"),
-                messageProvider.getMessage("profile.picture.io.error")
+                messageProvider.getMessage("profile.picture.io.error") + ": " + e.getMessage()
         );
     }
 }
