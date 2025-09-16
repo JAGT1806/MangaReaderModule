@@ -37,6 +37,14 @@ public class JwtFilter extends OncePerRequestFilter {
             String jwt = getJwtFromRequest(request);
 
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
+                String type = tokenProvider.extractTokenType(jwt);
+
+                if (!"access".equals(type)) {
+                    logger.warn("Se intentó usar un refresh token como un access token");
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+
                 String username = tokenProvider.extractUsername(jwt);
                 UserDetails userDetails = new CustomUserDetails(loadUserDetailsPort.execute(username));
 

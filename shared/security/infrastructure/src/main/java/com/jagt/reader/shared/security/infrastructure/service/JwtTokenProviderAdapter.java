@@ -35,6 +35,7 @@ public class JwtTokenProviderAdapter implements TokenProviderPort {
                 .setClaims(claims)
                 .setSubject(username)
                 .setExpiration(Date.from(Instant.now().plusSeconds(accessExpiration)))
+                .claim("type", "access")
                 .signWith(getKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
@@ -63,6 +64,11 @@ public class JwtTokenProviderAdapter implements TokenProviderPort {
     @Override
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
+    }
+
+    @Override
+    public String extractTokenType(String token) {
+        return extractClaim(token, claims -> claims.get("type", String.class));
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

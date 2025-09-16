@@ -7,4 +7,5 @@ public interface TokenProviderPort {
     String generateRefreshToken(String username, Map<String, Object> claims);
     boolean validateToken(String token);
     String extractUsername(String token);
+    String extractTokenType(String token);
 }
