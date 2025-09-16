@@ -17,7 +17,7 @@ public class LoadUserDetailsAdapter implements LoadUserDetailsPort {
 
     @Override
     public SecurityUser execute(String username) {
-        User user = getUserUseCase.execute(username);
+        User user = getUserUseCase.execute(username.toLowerCase());
 
         Set<String> authorities = new HashSet<>(user.getRoles().stream().map(role -> role.getName().value()).toList());
 

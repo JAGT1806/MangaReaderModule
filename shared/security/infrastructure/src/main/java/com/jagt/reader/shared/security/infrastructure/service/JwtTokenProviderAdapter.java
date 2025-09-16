@@ -20,19 +20,32 @@ import java.util.function.Function;
 public class JwtTokenProviderAdapter implements TokenProviderPort {
     @Value("${app.jwt.secret}")
     private String secret;
-    @Value("${app.jwt.expiration}")
-    private long expiration;
+    @Value("${app.jwt.access.expiration}")
+    private long accessExpiration;
+    @Value("${app.jwt.refresh.expitation}")
+    private long refreshExpiration;
 
     private SecretKey getKey() {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
     @Override
-    public String generateToken(String username, Map<String, Object> claims) {
+    public String generateAccessToken(String username, Map<String, Object> claims) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)
-                .setExpiration(Date.from(Instant.now().plusSeconds(expiration)))
+                .setExpiration(Date.from(Instant.now().plusSeconds(accessExpiration)))
+                .signWith(getKey(), SignatureAlgorithm.HS512)
+                .compact();
+    }
+
+    @Override
+    public String generateRefreshToken(String username, Map<String, Object> claims) {
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(username)
+                .setExpiration(Date.from(Instant.now().plusSeconds(refreshExpiration)))
+                .claim("type", "refresh")
                 .signWith(getKey(), SignatureAlgorithm.HS512)
                 .compact();
     }

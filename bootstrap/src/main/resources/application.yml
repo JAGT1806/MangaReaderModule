@@ -40,7 +40,10 @@ app:
         expiration: 1
   jwt:
     secret: ${JWT_KEY}
-    expiration: ${JWT_EXPIRATION}
+    access:
+      expiration: ${JWT_ACCESS_EXPIRATION}
+    refresh:
+      expitation: ${JWT_REFRESH_EXPIRATION}
 
 
 aws:
