@@ -32,6 +32,15 @@ app:
       - image/jpeg
       - image/png
       - image/gif
+  security:
+    token:
+      activation:
+        expiration: 24
+      recovery:
+        expiration: 1
+  jwt:
+    secret: ${JWT_KEY}
+    expiration: ${JWT_EXPIRATION}
 
 
 aws:

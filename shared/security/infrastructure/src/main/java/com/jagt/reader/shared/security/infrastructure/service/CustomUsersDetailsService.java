@@ -1,7 +1,7 @@
 package com.jagt.reader.shared.security.infrastructure.service;
 
 import com.jagt.reader.shared.security.domain.model.SecurityUser;
-import com.jagt.reader.shared.security.domain.port.input.LoadUserDetailsPort;
+import com.jagt.reader.shared.security.domain.port.output.LoadUserDetailsPort;
 import com.jagt.reader.shared.security.infrastructure.model.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -19,6 +19,10 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.jagt.reader.shared.security.domain</groupId>
+            <artifactId>shared.security.domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

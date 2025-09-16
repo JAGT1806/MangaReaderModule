@@ -15,5 +15,10 @@
     <name>auth.infrastructure</name>
 
     <dependencies>
+        <dependency>
+            <groupId>com.jagt.reader.auth.application</groupId>
+            <artifactId>auth.application</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

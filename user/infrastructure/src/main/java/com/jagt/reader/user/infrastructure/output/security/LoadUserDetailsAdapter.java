@@ -1,7 +1,7 @@
 package com.jagt.reader.user.infrastructure.output.security;
 
 import com.jagt.reader.shared.security.domain.model.SecurityUser;
-import com.jagt.reader.shared.security.domain.port.input.LoadUserDetailsPort;
+import com.jagt.reader.shared.security.domain.port.output.LoadUserDetailsPort;
 import com.jagt.reader.user.application.port.input.GetUserUseCase;
 import com.jagt.reader.user.domain.model.User;
 import lombok.RequiredArgsConstructor;

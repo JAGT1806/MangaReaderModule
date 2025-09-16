@@ -23,4 +23,6 @@ public class CodeSecurity {
     private User user;
     private LocalDateTime expiration;
     private boolean used;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
