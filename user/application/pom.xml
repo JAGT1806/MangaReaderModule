@@ -38,5 +38,11 @@
             <artifactId>shared.i18n.domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.jagt.reader.role.application</groupId>
+            <artifactId>role.application</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

@@ -30,5 +30,10 @@
             <artifactId>shared.security.domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.jagt.reader.user.application</groupId>
+            <artifactId>user.application</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
