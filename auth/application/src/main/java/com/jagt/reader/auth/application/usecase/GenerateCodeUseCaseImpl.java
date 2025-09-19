@@ -6,6 +6,7 @@ import com.jagt.reader.auth.domain.model.CodeSecurity;
 import com.jagt.reader.auth.domain.model.enums.CodeType;
 import com.jagt.reader.auth.domain.port.output.CodeSecurityPersistencePort;
 import com.jagt.reader.auth.domain.port.output.EmailSenderPort;
+import com.jagt.reader.shared.common.domain.model.value.AuditTimestampsValue;
 import com.jagt.reader.user.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +40,7 @@ public class GenerateCodeUseCaseImpl implements GenerateCodeUseCase {
                 .code(code)
                 .expiration(LocalDateTime.now().plusHours(expirationHours))
                 .used(false)
+                .audit(AuditTimestampsValue.now())
                 .build();
 
         codeSecurityPersistencePort.save(codeSecurity);

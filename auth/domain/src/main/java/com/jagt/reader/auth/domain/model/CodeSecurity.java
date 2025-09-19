@@ -1,6 +1,7 @@
 package com.jagt.reader.auth.domain.model;
 
 import com.jagt.reader.auth.domain.model.enums.CodeType;
+import com.jagt.reader.shared.common.domain.model.value.AuditTimestampsValue;
 import com.jagt.reader.shared.common.domain.model.value.IDValue;
 import com.jagt.reader.user.domain.model.User;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,5 @@ public class CodeSecurity {
     private User user;
     private LocalDateTime expiration;
     private boolean used;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private AuditTimestampsValue audit;
 }
