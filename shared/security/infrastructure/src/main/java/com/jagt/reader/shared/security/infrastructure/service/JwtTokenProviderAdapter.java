@@ -22,7 +22,7 @@ public class JwtTokenProviderAdapter implements TokenProviderPort {
     private String secret;
     @Value("${app.jwt.access.expiration}")
     private long accessExpiration;
-    @Value("${app.jwt.refresh.expitation}")
+    @Value("${app.jwt.refresh.expiration}")
     private long refreshExpiration;
 
     private SecretKey getKey() {

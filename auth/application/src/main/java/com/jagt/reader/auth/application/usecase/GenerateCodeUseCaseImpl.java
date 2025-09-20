@@ -38,6 +38,7 @@ public class GenerateCodeUseCaseImpl implements GenerateCodeUseCase {
         CodeSecurity codeSecurity = CodeSecurity.builder()
                 .user(command.user())
                 .code(code)
+                .type(command.codeType())
                 .expiration(LocalDateTime.now().plusHours(expirationHours))
                 .used(false)
                 .audit(AuditTimestampsValue.now())
@@ -45,7 +46,7 @@ public class GenerateCodeUseCaseImpl implements GenerateCodeUseCase {
 
         codeSecurityPersistencePort.save(codeSecurity);
 
-        emailSenderPort.sendCode(command.user().getUserValue().getEmail(), code, codeSecurity.getExpiration());
+        emailSenderPort.sendCode(command.user().getUserValue().getEmail(), code, command.codeType(), codeSecurity.getExpiration());
     }
 
     private void invalidateExistingCodes(User user, CodeType codeType) {
