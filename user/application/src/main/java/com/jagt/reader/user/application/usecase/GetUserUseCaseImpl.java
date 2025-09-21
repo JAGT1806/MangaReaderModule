@@ -50,7 +50,7 @@ public class GetUserUseCaseImpl implements GetUserUseCase {
 
     @Override
     public User execute(String email) {
-        return port.findByEmail(email)
-                .orElseThrow(() -> new UserEmailNotFoundException(String.valueOf(email)));
+        return port.findByEmail(email.toLowerCase())
+                .orElseThrow(() -> new UserEmailNotFoundException(email));
     }
 }
