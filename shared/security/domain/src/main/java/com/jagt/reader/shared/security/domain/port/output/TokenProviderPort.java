@@ -8,4 +8,5 @@ public interface TokenProviderPort {
     boolean validateToken(String token);
     String extractUsername(String token);
     String extractTokenType(String token);
+    String extractIp(String jwt);
 }

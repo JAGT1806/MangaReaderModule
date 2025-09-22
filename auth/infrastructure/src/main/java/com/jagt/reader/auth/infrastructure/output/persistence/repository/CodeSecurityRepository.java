@@ -1,6 +1,5 @@
 package com.jagt.reader.auth.infrastructure.output.persistence.repository;
 
-import com.jagt.reader.auth.domain.model.CodeSecurity;
 import com.jagt.reader.auth.infrastructure.output.persistence.entity.CodeSecurityEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,5 +9,5 @@ import java.util.Optional;
 public interface CodeSecurityRepository extends JpaRepository<CodeSecurityEntity, Long> {
     List<CodeSecurityEntity> findAllByUser_IdAndType(Long userId, String type);
 
-    Optional<CodeSecurity> findByCodeAndUser_Id(String code, Long userId);
+    Optional<CodeSecurityEntity> findByCodeAndUser_Id(String code, Long userId);
 }

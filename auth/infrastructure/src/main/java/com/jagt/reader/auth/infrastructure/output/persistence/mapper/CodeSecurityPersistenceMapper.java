@@ -13,11 +13,11 @@ import org.mapstruct.Mapping;
 public interface CodeSecurityPersistenceMapper {
     @Mapping(target = "id.id", source = "id")
     @Mapping(target = "audit.createdAt", source = "createdAt")
-    @Mapping(target = "audit.updateAt", source = "updateAt")
+    @Mapping(target = "audit.updatedAt", source = "updatedAt")
     CodeSecurity toDomain(CodeSecurityEntity entity);
 
     @Mapping(target = "id", source = "id.id")
     @Mapping(target = "createdAt", source = "audit.createdAt")
-    @Mapping(target = "updateAt", source = "audit.updateAt")
+    @Mapping(target = "updatedAt", source = "audit.updatedAt")
     CodeSecurityEntity toEntity(CodeSecurity domain);
 }

@@ -28,11 +28,17 @@ public class RefreshSessionUseCaseImpl implements RefreshSessionUseCase {
         if (!tokenProvider.validateToken(refreshToken))
             throw new IllegalArgumentException(messageProvider.getMessage("token.refresh.invalid"));
 
+        String userIp = tokenProvider.extractIp(refreshToken);
+
+        if (!userIp.equals(command.ip()))
+            throw new IllegalArgumentException(messageProvider.getMessage("token.refresh.invalid"));
+
         String username = tokenProvider.extractUsername(refreshToken);
         SecurityUser securityUser = loadUserDetailsPort.execute(username);
 
         Map<String, Object> claims = Map.of("roles", securityUser.getRoles(),
-                "userId", securityUser.getId());
+                "userId", securityUser.getId(),
+                "ip", userIp);
 
         String newAccessToken = tokenProvider.generateAccessToken(username, claims);
 

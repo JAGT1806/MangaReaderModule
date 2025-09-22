@@ -33,10 +33,13 @@ public class LoginUseCaseImpl implements LoginUseCase {
         authenticationManager.authenticate(command.email(), command.password());
 
         Map<String, Object> claims = Map.of("roles", securityUser.getRoles(),
-                "userId", securityUser.getId());
+                "userId", securityUser.getId(),
+                "ip", command.ip());
 
         String accessToken = tokenProvider.generateAccessToken(command.email().toLowerCase(), claims);
-        String refreshToken = tokenProvider.generateRefreshToken(command.email().toLowerCase(), Map.of());
+        String refreshToken = tokenProvider.generateRefreshToken(command.email().toLowerCase(), Map.of(
+                "ip", command.ip()
+        ));
 
         return mapper.toDomain("Bearer", accessToken, refreshToken);
     }

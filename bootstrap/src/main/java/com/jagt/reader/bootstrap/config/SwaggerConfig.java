@@ -1,5 +1,8 @@
 package com.jagt.reader.bootstrap.config;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.StringSchema;
@@ -15,8 +18,20 @@ import java.time.format.DateTimeFormatter;
 
 @Configuration
 @RequiredArgsConstructor
+@SecurityScheme(
+        name = "bearerAuth",
+        type = SecuritySchemeType.HTTP,
+        scheme = "bearer",
+        bearerFormat = "JWT"
+)
+@SecurityScheme(
+        name = "cookieAuth",
+        type = SecuritySchemeType.APIKEY,
+        in = SecuritySchemeIn.COOKIE,
+        paramName = "refreshToken"
+)
 public class SwaggerConfig {
-    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss 'Z'";
+    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     static {
         StringSchema dateTimeSchema = new StringSchema();

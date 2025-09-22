@@ -71,6 +71,11 @@ public class JwtTokenProviderAdapter implements TokenProviderPort {
         return extractClaim(token, claims -> claims.get("type", String.class));
     }
 
+    @Override
+    public String extractIp(String token) {
+        return extractClaim(token, claims -> claims.get("ip", String.class));
+    }
+
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);

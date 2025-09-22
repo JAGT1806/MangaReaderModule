@@ -45,6 +45,14 @@ public class JwtFilter extends OncePerRequestFilter {
                     return;
                 }
 
+                String tokenIp = tokenProvider.extractIp(jwt);
+                String requestIp = getClientIp(request);
+                if (tokenIp != null && !tokenIp.equals(requestIp)) {
+                    logger.error("La IP no coincide: token IP = " + tokenIp + ", request IP = " + requestIp);
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+
                 String username = tokenProvider.extractUsername(jwt);
                 UserDetails userDetails = new CustomUserDetails(loadUserDetailsPort.execute(username));
 
@@ -71,4 +79,13 @@ public class JwtFilter extends OncePerRequestFilter {
         }
         return null;
     }
+
+    private String getClientIp(HttpServletRequest request) {
+        String forwarded = request.getHeader("X-Forwarded-For");
+        if (forwarded != null && !forwarded.isBlank()) {
+            return forwarded.split(",")[0];
+        }
+        return request.getRemoteAddr();
+    }
+
 }

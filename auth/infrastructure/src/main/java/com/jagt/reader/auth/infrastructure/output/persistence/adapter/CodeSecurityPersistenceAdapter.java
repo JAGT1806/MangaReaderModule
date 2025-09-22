@@ -44,7 +44,8 @@ public class CodeSecurityPersistenceAdapter implements CodeSecurityPersistencePo
 
     @Override
     public Optional<CodeSecurity> findByCodeAndUserId(String code, Long userId) {
-        return repository.findByCodeAndUser_Id(code, userId);
+        return repository.findByCodeAndUser_Id(code, userId)
+                .map(mapper::toDomain);
     }
 
     @Override

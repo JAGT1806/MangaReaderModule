@@ -57,8 +57,8 @@ public class GenerateCodeUseCaseImpl implements GenerateCodeUseCase {
 
 
     private String generateCode(CodeType codeType) {
-        int length = codeType.getLength();
         String prefix = codeType.getPrefix();
+        int length = codeType.getLength() - prefix.length();
 
         int min = (int) Math.pow(10, length - 1);
         int max = (int) Math.pow(10, length) - 1;
