@@ -17,4 +17,6 @@ public interface FavoritePersistencePort {
     List<Favorite> findAllByUserId(Long id, int offset, int limit);
 
     long countByUserId(Long id);
+
+    void deleteAllByUserID(IDValue userId);
 }

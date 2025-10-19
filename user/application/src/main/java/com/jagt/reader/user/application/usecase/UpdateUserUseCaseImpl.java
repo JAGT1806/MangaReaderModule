@@ -22,12 +22,6 @@ public class UpdateUserUseCaseImpl implements UpdateUserUseCase {
     private final ProfilePictureUseCase profilePictureUseCase;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdateUserUseCaseImpl.class);
-
-    @Override
-    public void execute() {
-
-    }
-
     @Override
     public void execute(UpdateUserProfilePictureCommand command) throws IOException {
         LOGGER.info("Update user profile picture");

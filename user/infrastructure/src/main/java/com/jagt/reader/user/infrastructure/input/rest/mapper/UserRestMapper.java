@@ -1,10 +1,15 @@
 package com.jagt.reader.user.infrastructure.input.rest.mapper;
 
 import com.jagt.reader.role.domain.model.Role;
+import com.jagt.reader.shared.common.domain.model.Pagination;
 import com.jagt.reader.user.application.command.CreateUserCommand;
+import com.jagt.reader.user.application.command.UpdatePasswordCommand;
 import com.jagt.reader.user.application.command.UpdateUserProfilePictureCommand;
+import com.jagt.reader.user.application.query.GetUserFilterQuery;
 import com.jagt.reader.user.domain.model.User;
 import com.jagt.reader.user.infrastructure.input.rest.request.CreateUserRequest;
+import com.jagt.reader.user.infrastructure.input.rest.request.UpdatePasswordRequest;
+import com.jagt.reader.user.infrastructure.input.rest.response.UserListResponse;
 import com.jagt.reader.user.infrastructure.input.rest.response.UserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -26,6 +31,8 @@ public interface UserRestMapper {
     @Mapping(target = "roles", source = "roles", qualifiedByName = "mapRolesToStrings")
     UserResponse toResponse(User user);
 
+    UserListResponse toResponse(Pagination<User> pagination);
+
     @Named("mapRolesToStrings")
     default Set<String> mapRolesToStrings(Set<Role> roles) {
         if (roles == null) {
@@ -38,6 +45,17 @@ public interface UserRestMapper {
 
     @Mapping(target = "userId", expression = "java(IDValue.builder().id(userId).build())")
     UpdateUserProfilePictureCommand toCommand(Long userId, MultipartFile file);
+
+    @Mapping(target = "userId", expression = "java(IDValue.builder().id(userId).build())")
+    @Mapping(target = "password", source = "request.password")
+    @Mapping(target = "newPassword", source = "request.newPassword")
+    UpdatePasswordCommand toCommand(Long userId, UpdatePasswordRequest request);
+
+    @Mapping(target = "username.name", source = "username")
+    @Mapping(target = "email.name", source = "email")
+    @Mapping(target = "role.name", source = "role")
+    @Mapping(target = "pagination", expression = "java(new GetCommonQuery(offset, limit))")
+    GetUserFilterQuery toQuery(String username, String email, String role, int offset, int limit, Boolean enabled);
 
 
     @Mapping(target = "username", expression = "java(NameValue.builder().name(request.username()).build())")

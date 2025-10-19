@@ -56,4 +56,9 @@ public class FavoritePersistenceAdapter implements FavoritePersistencePort {
     public long countByUserId(Long id) {
         return repository.countByUser_Id(id);
     }
+
+    @Override
+    public void deleteAllByUserID(IDValue userId) {
+        repository.deleteAllByUser_Id(userId.getId());
+    }
 }

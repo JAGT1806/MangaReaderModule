@@ -13,12 +13,14 @@ import com.jagt.reader.shared.common.domain.model.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/roles")
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
 public class RoleController implements RoleControllerDoc {
     private final GetRoleUseCase getRoleUseCase;
     private final CreateRoleUseCase createRoleUseCase;
@@ -43,11 +45,13 @@ public class RoleController implements RoleControllerDoc {
     }
 
     @Override
+    @PreAuthorize("@userSecurityExpression.canModifyRole(#roleId)")
     public ResponseEntity<RoleResponse> updateRole(Long roleId, UpdateRoleRequest request) {
         return ResponseEntity.ok(mapper.toResponse(updateRoleUseCase.execute(mapper.toUpdateCommand(roleId, request))));
     }
 
     @Override
+    @PreAuthorize("@userSecurityExpression.canDeleteRole(#roleId)")
     public ResponseEntity<Void> deleteRole(Long roleId) {
         deleteRoleUseCase.execute(mapper.toValue(roleId));
         return ResponseEntity.noContent().build();

@@ -1,5 +1,6 @@
 package com.jagt.reader.user.domain.port.output;
 
+import com.jagt.reader.shared.common.domain.model.value.IDValue;
 import com.jagt.reader.user.domain.model.User;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface UserPersistencePort {
     Optional<List<User>> findByEnabledIsFalse();
 
     boolean existsByEmail(String email);
+
+    List<User> findAllByRoleId(IDValue roleId);
 }

@@ -4,8 +4,8 @@ import com.jagt.reader.role.application.mapper.RoleApplicationMapper;
 import com.jagt.reader.role.application.port.input.DeleteRoleUseCase;
 import com.jagt.reader.role.application.port.input.GetRoleUseCase;
 import com.jagt.reader.role.application.validation.input.Validation;
-// import com.jagt.reader.role.application.validation.output.RoleUsageChecker;
-//import com.jagt.reader.role.domain.exception.RoleInUseException;
+import com.jagt.reader.role.application.validation.output.RoleUsageChecker;
+import com.jagt.reader.role.domain.exception.RoleInUseException;
 import com.jagt.reader.role.domain.port.output.RolePersistencePort;
 import com.jagt.reader.shared.common.domain.model.value.IDValue;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class DeleteRoleUseCaseImpl implements DeleteRoleUseCase {
     private final RolePersistencePort rolePersistencePort;
     private final RoleApplicationMapper mapper;
     private final GetRoleUseCase getRoleUseCase;
-//    private final RoleUsageChecker roleUsageChecker;
+    private final RoleUsageChecker roleUsageChecker;
     private final Validation validation;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DeleteRoleUseCaseImpl.class);
@@ -31,8 +31,8 @@ public class DeleteRoleUseCaseImpl implements DeleteRoleUseCase {
 
         validation.validateNull(id);
 
-        //if (roleUsageChecker.isRoleInUse(mapper.toValue(id.value())))
-        //    throw new RoleInUseException(getRoleUseCase.execute(id).getName().value());
+        if (roleUsageChecker.isRoleInUse(mapper.toValue(id.value())))
+            throw new RoleInUseException(getRoleUseCase.execute(id).getName().value());
 
         rolePersistencePort.delete(id.value());
     }

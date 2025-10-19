@@ -1,5 +1,6 @@
 package com.jagt.reader.user.infrastructure.output.persistence.adapter;
 
+import com.jagt.reader.shared.common.domain.model.value.IDValue;
 import com.jagt.reader.user.domain.model.User;
 import com.jagt.reader.user.domain.port.output.UserPersistencePort;
 import com.jagt.reader.user.infrastructure.output.persistence.mapper.UserPersistenceMapper;
@@ -64,5 +65,12 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     @Override
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public List<User> findAllByRoleId(IDValue roleId) {
+        return userRepository.findAllByRoleId(roleId.getId()).stream()
+                .map(mapper::toDomain)
+                .toList();
     }
 }

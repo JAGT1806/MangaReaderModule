@@ -1,5 +1,6 @@
 package com.jagt.reader.user.infrastructure.output.persistence.repository;
 
+import com.jagt.reader.user.domain.model.User;
 import com.jagt.reader.user.infrastructure.output.persistence.entity.UserEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -36,4 +37,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
                         @Param("enabled") Boolean enabled);
 
     Optional<List<UserEntity>> findByEnabledIsFalse();
+
+    @Query("SELECT u FROM UserEntity u LEFT JOIN u.roles r WHERE r.id = :roleId")
+    List<UserEntity> findAllByRoleId(Long roleId);
 }

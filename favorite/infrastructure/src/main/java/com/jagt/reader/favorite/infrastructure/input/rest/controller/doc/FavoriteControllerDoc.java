@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Tag(name = "Favorite", description = "Operaciones relacionadas con los mangas favoritos del usuario")
+@SecurityRequirement(name = "bearerAuth")
 public interface FavoriteControllerDoc {
     @Operation(summary = "Obtener todos los mangas favoritos", description = "Recupera la información de los mangas favoritos de todos los usuarios de forma paginada")
     @ApiResponses({
