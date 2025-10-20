@@ -1,12 +1,14 @@
 package com.jagt.reader.auth.infrastructure.output.persistence.adapter;
 
 import com.jagt.reader.auth.domain.model.CodeSecurity;
+import com.jagt.reader.auth.domain.model.enums.CodeType;
 import com.jagt.reader.auth.domain.port.output.CodeSecurityPersistencePort;
 import com.jagt.reader.auth.infrastructure.output.persistence.mapper.CodeSecurityPersistenceMapper;
 import com.jagt.reader.auth.infrastructure.output.persistence.repository.CodeSecurityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,5 +55,12 @@ public class CodeSecurityPersistenceAdapter implements CodeSecurityPersistencePo
         repository.saveAll(existingCodes.stream()
                 .map(mapper::toEntity)
                 .toList());
+    }
+
+    @Override
+    public List<CodeSecurity> findAllByTypeAndUsedTrueAndExpirationBefore(CodeType codeType, LocalDateTime today) {
+        return repository.findAllByTypeAndUsedIsTrueAndExpirationBefore(codeType.name(), today).stream()
+                .map(mapper::toDomain)
+                .toList();
     }
 }

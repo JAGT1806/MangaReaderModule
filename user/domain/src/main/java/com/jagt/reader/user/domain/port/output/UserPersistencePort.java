@@ -24,4 +24,6 @@ public interface UserPersistencePort {
     boolean existsByEmail(String email);
 
     List<User> findAllByRoleId(IDValue roleId);
+
+    void delete(User user);
 }

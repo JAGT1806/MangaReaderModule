@@ -73,4 +73,9 @@ public class UserPersistenceAdapter implements UserPersistencePort {
                 .map(mapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public void delete(User user) {
+        userRepository.delete(mapper.toEntity(user));
+    }
 }
