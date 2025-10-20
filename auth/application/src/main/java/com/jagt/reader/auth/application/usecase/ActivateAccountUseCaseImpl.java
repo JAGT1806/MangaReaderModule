@@ -4,7 +4,6 @@ import com.jagt.reader.auth.application.command.ActivateAccountCommand;
 import com.jagt.reader.auth.application.port.input.ActivateAccountUseCase;
 import com.jagt.reader.auth.application.port.input.GetCodeUseCase;
 import com.jagt.reader.auth.application.port.input.ValidateCodeUseCase;
-import com.jagt.reader.auth.domain.exception.InvalidCodeException;
 import com.jagt.reader.auth.domain.model.CodeSecurity;
 import com.jagt.reader.auth.domain.port.output.CodeSecurityPersistencePort;
 import com.jagt.reader.shared.common.domain.model.value.IDValue;

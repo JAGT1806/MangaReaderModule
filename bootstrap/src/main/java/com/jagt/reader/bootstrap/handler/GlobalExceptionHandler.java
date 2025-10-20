@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.IOException;
 import java.util.List;
 
 import static com.jagt.reader.shared.common.infrastructure.input.web.util.ErrorResponseBuilder.build;
@@ -32,5 +33,23 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException e) {
         return build(HttpStatus.BAD_REQUEST, messageProvider.getMessage("data.bad.request"), e.getMessage());
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<ErrorResponse> handleIOException(IOException e) {
+        return build(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                messageProvider.getMessage("file.process.error"),
+                messageProvider.getMessage("file.general.error")
+        );
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        return build(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                messageProvider.getMessage("server.error"),
+                messageProvider.getMessage("server.error.unexpected")
+        );
     }
 }

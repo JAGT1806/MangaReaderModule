@@ -24,7 +24,7 @@ public class GenerateRecoveryCodeUseCaseImpl implements GenerateRecoveryCodeUseC
         User user = getUserUseCase.execute(command.email());
 
         if (!user.isEnabled())
-            throw new UserNotEnabledException(messageProvider.getMessage("user.not.enabled"));
+            throw new UserNotEnabledException(messageProvider.getMessage("user.not.enabled.code"));
 
         generateCodeUseCase.execute(new GenerateCodeCommand(
                 user, CodeType.RECOVERING

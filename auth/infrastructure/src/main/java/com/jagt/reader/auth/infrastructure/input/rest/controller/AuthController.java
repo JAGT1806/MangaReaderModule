@@ -101,7 +101,7 @@ public class AuthController implements AuthControllerDoc {
                 .filter(c -> "refreshToken".equals(c.getName()))
                 .findFirst()
                 .map(Cookie::getValue)
-                .orElse(null);
+                .orElse(request.refreshToken());
 
         RefreshTokenRequest request1 = new RefreshTokenRequest(refreshToken);
 

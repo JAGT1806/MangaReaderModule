@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,12 +53,12 @@ public interface FavoriteControllerDoc {
             @ApiResponse(responseCode = "204", description = "Manga añadido exitosamente a la lista de favoritos de usuario")
     })
     @PostMapping("/user/{user-id}")
-    ResponseEntity<Void> addFavorite(@PathVariable("user-id") Long userId, @RequestBody AddFavoriteRequest request);
+    ResponseEntity<Void> addFavorite(@PathVariable("user-id") Long userId, @RequestBody @Valid AddFavoriteRequest request);
 
     @Operation(summary = "Elimina un manga de favoríto de un usuario.", description = "Elimina un manga de la lista de favoritos del usuario.")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Manga eliminado exitosamente de la lista de favoritos de usuario")
     })
     @DeleteMapping("/user/{user-id}")
-    ResponseEntity<Void> deleteFavorite(@PathVariable("user-id") Long userId, @RequestBody DeleteFavoriteRequest request);
+    ResponseEntity<Void> deleteFavorite(@PathVariable("user-id") Long userId, @RequestBody @Valid DeleteFavoriteRequest request);
 }

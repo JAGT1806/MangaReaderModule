@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
-import java.io.IOException;
-
 import static com.jagt.reader.shared.common.infrastructure.input.web.util.ErrorResponseBuilder.build;
 
 @RestControllerAdvice
@@ -74,12 +72,21 @@ public class UserExceptionHandler {
         );
     }
 
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity<ErrorResponse> handleIOException(IOException e) {
+    @ExceptionHandler(UserEnabledException.class)
+    public ResponseEntity<ErrorResponse> handleUserEnabledException(UserEnabledException e) {
         return build(
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                messageProvider.getMessage("profile.picture.error"),
-                messageProvider.getMessage("profile.picture.io.error") + ": " + e.getMessage()
+                HttpStatus.NOT_FOUND,
+                messageProvider.getMessage("user.already.enabled"),
+                messageProvider.getMessage(e.getMessage())
+        );
+    }
+
+    @ExceptionHandler(UserNotEnabledException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotEnabledException(UserNotEnabledException e) {
+        return build(
+                HttpStatus.NOT_FOUND,
+                messageProvider.getMessage("user.not.enabled"),
+                messageProvider.getMessage(e.getMessage())
         );
     }
 }

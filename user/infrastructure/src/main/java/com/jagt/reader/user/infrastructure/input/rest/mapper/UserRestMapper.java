@@ -2,12 +2,10 @@ package com.jagt.reader.user.infrastructure.input.rest.mapper;
 
 import com.jagt.reader.role.domain.model.Role;
 import com.jagt.reader.shared.common.domain.model.Pagination;
-import com.jagt.reader.user.application.command.CreateUserCommand;
 import com.jagt.reader.user.application.command.UpdatePasswordCommand;
 import com.jagt.reader.user.application.command.UpdateUserProfilePictureCommand;
 import com.jagt.reader.user.application.query.GetUserFilterQuery;
 import com.jagt.reader.user.domain.model.User;
-import com.jagt.reader.user.infrastructure.input.rest.request.CreateUserRequest;
 import com.jagt.reader.user.infrastructure.input.rest.request.UpdatePasswordRequest;
 import com.jagt.reader.user.infrastructure.input.rest.response.UserListResponse;
 import com.jagt.reader.user.infrastructure.input.rest.response.UserResponse;
@@ -56,9 +54,4 @@ public interface UserRestMapper {
     @Mapping(target = "role.name", source = "role")
     @Mapping(target = "pagination", expression = "java(new GetCommonQuery(offset, limit))")
     GetUserFilterQuery toQuery(String username, String email, String role, int offset, int limit, Boolean enabled);
-
-
-    @Mapping(target = "username", expression = "java(NameValue.builder().name(request.username()).build())")
-    @Mapping(target = "email", expression = "java(NameValue.builder().name(request.email()).build())")
-    CreateUserCommand toCommand(CreateUserRequest request);
 }

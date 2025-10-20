@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +31,7 @@ public interface AuthControllerDoc {
                     content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/login")
-    ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest, HttpServletResponse httpResponse);
+    ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request, HttpServletRequest httpRequest, HttpServletResponse httpResponse);
 
     @Operation(summary = "Registrar un usuario al sistema")
     @ApiResponses(value = {
@@ -40,7 +41,7 @@ public interface AuthControllerDoc {
                     content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/register")
-    ResponseEntity<Void> register(@RequestBody RegisterRequest request);
+    ResponseEntity<Void> register(@RequestBody @Valid RegisterRequest request);
 
     @Operation(summary = "Reenviar código de activación de la cuenta")
     @ApiResponses(value = {
@@ -48,7 +49,7 @@ public interface AuthControllerDoc {
                     content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/activation/resend")
-    ResponseEntity<Void> resendActivationCode(@RequestBody ResendActivationCodeRequest request);
+    ResponseEntity<Void> resendActivationCode(@RequestBody @Valid ResendActivationCodeRequest request);
 
     @Operation(summary = "Activar cuenta registrada del usuario")
     @ApiResponses(value = {
@@ -58,7 +59,7 @@ public interface AuthControllerDoc {
                     content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/activation")
-    ResponseEntity<Void> activateAccount(@RequestBody ActivateAccountRequest request);
+    ResponseEntity<Void> activateAccount(@RequestBody @Valid ActivateAccountRequest request);
 
     @Operation(summary = "Enviar código para recuperar cuenta")
     @ApiResponses(value = {
@@ -66,7 +67,7 @@ public interface AuthControllerDoc {
                     content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/recovery/request")
-    ResponseEntity<Void> requestRecoveryCode(@RequestBody RecoveryCodeRequest request);
+    ResponseEntity<Void> requestRecoveryCode(@RequestBody @Valid RecoveryCodeRequest request);
 
     @Operation(summary = "Recuperar cuenta")
     @ApiResponses(value = {
@@ -76,7 +77,7 @@ public interface AuthControllerDoc {
                     content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/recovery/reset")
-    ResponseEntity<Void> resetPassword(@RequestBody ResetPasswordRequest request);
+    ResponseEntity<Void> resetPassword(@RequestBody @Valid ResetPasswordRequest request);
 
     @Operation(summary = "Refrescar token de sesión")
     @ApiResponses(value = {
@@ -84,7 +85,6 @@ public interface AuthControllerDoc {
                     content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/refresh")
-    @SecurityRequirement(name = "cookieAuth")
     ResponseEntity<LoginResponse> refreshToken(@RequestBody RefreshTokenRequest request, HttpServletRequest httpRequest);
 
     @Operation(summary = "Cierre de sesión del usuario")
